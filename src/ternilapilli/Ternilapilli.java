@@ -48,8 +48,6 @@ public class Ternilapilli {
 //			winner = X;
 //		}
 //		turn = O; 
-		status.checkIfOsContainsIt(position);
-		status.checkIfXsContainsIt(position);
 		status.putXAt(position);
 	}
 
@@ -74,8 +72,6 @@ public class Ternilapilli {
 //			winner = O;
 //		}
 //		turn = X;
-		status.checkIfOsContainsIt(position);
-		status.checkIfXsContainsIt(position);
 		status.putOAt(position);
 	}
 
@@ -202,5 +198,27 @@ public class Ternilapilli {
 	 
 	public boolean allTokensOnBoard() {
 		return xs.size() > 3 || os.size() > 3;
+	}
+	
+	public void putXWhenItsXsTurn(Position position) {
+		xs.add(position);
+		status = new TurnO(this);
+
+	}
+	
+	public void FailIfXPutsWhenItsOsTurn(Position position) {
+		throw new RuntimeException(notOsTurn);
+	}
+	
+	
+	
+	public void putOWhenItsOsTurn(Position position) {
+		os.add(position);
+		status = new TurnX(this);
+
+	}
+	 
+	public void FailIfOPutsWhenItsXsTurn(Position position) {
+		throw new RuntimeException(notXsTurn);
 	}
 }

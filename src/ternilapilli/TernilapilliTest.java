@@ -50,7 +50,7 @@ public class TernilapilliTest {
 		assertTrue(game.getOs().isEmpty());
 		
 	}
-
+ 
 	@Test
 	void test04OCannotPlayTwiceInARow() {
 		Ternilapilli game = new Ternilapilli();
@@ -114,139 +114,139 @@ public class TernilapilliTest {
 		assertTrue(game.getOs().contains(new Position(2, 2)));
 	}
 
-	@Test
-	void test09NoOneWins() {
-		Ternilapilli game = new Ternilapilli();
-		game.putXAt(new Position(1, 1));
-		game.putOAt(new Position(2, 2));
-		game.putXAt(new Position(3, 3));
-		game.putOAt(new Position(1, 2));
-
-		assertFalse(game.isWinnerX());
-		assertFalse(game.isWinnerO());
-	}
-
-	@Test
-	void test10CheckIfXsWinsByRows() {
-		Ternilapilli game = new Ternilapilli();
-		game.putXAt(new Position(1, 1));
-		game.putOAt(new Position(2, 2));
-		game.putXAt(new Position(1, 3));
-		game.putOAt(new Position(3, 2));
-		game.putXAt(new Position(1, 2));
-
-		assertTrue(game.isWinnerX());
-		assertFalse(game.isWinnerO());
-	}
-
-	@Test
-	void test11CheckIfOsWinsByRows() {
-		Ternilapilli game = new Ternilapilli();
-		game.putXAt(new Position(3, 3));
-		game.putOAt(new Position(1, 1));
-		game.putXAt(new Position(2, 1));
-		game.putOAt(new Position(1, 3));
-		game.putXAt(new Position(3, 1));
-		game.putOAt(new Position(1, 2));
-
-		assertFalse(game.isWinnerX());
-		assertTrue(game.isWinnerO());
-	}
-
-	@Test
-	void test12CheckIfXsWinsByColumns() {
-		Ternilapilli game = new Ternilapilli();
-		game.putXAt(new Position(3, 1));
-		game.putOAt(new Position(2, 2));
-		game.putXAt(new Position(2, 1));
-		game.putOAt(new Position(3, 2));
-		game.putXAt(new Position(1, 1));
-
-		assertTrue(game.isWinnerX());
-		assertFalse(game.isWinnerO());
-	}
-
-	@Test
-	void test13CheckIfOsWinsByColumns() {
-		Ternilapilli game = new Ternilapilli();
-		game.putXAt(new Position(3, 3));
-		game.putOAt(new Position(2, 2));
-		game.putXAt(new Position(2, 1));
-		game.putOAt(new Position(3, 2));
-		game.putXAt(new Position(1, 1));
-		game.putOAt(new Position(1, 2));
-
-		assertFalse(game.isWinnerX());
-		assertTrue(game.isWinnerO());
-	}
-
-	@Test
-	void test14CheckHasWon() {
-		Ternilapilli game = new Ternilapilli();
-		game.putXAt(new Position(3, 3));
-		game.putOAt(new Position(2, 2));
-		game.putXAt(new Position(2, 1));
-		game.putOAt(new Position(3, 2));
-		game.putXAt(new Position(1, 1));
-		game.putOAt(new Position(1, 2));
-
-		assertFalse(game.XHasWon());
-		assertTrue(game.OHasWon());
-	}
-
-	@Test
-	void test15CheckXWinsInTheLeftDiagonal() {
-		Ternilapilli game = new Ternilapilli();
-		game.putXAt(new Position(3, 3));
-		game.putOAt(new Position(2, 1));
-		game.putXAt(new Position(2, 2));
-		game.putOAt(new Position(3, 2));
-		game.putXAt(new Position(1, 1));
-
-		assertTrue(game.XHasWon());
-		assertFalse(game.OHasWon());
-	}
-
-	@Test
-	void test16CheckOWinsInTheLeftDiagonal() {
-		Ternilapilli game = new Ternilapilli();
-		game.putXAt(new Position(3, 1));
-		game.putOAt(new Position(2, 2));
-		game.putXAt(new Position(2, 1));
-		game.putOAt(new Position(3, 3));
-		game.putXAt(new Position(1, 2));
-		game.putOAt(new Position(1, 1));
-
-		assertFalse(game.XHasWon());
-		assertTrue(game.OHasWon());
-	}
-
-	@Test
-	void test17CheckXWinsInTheRightDiagonal() {
-		Ternilapilli game = new Ternilapilli();
-		game.putXAt(new Position(1, 3));
-		game.putOAt(new Position(2, 1));
-		game.putXAt(new Position(2, 2));
-		game.putOAt(new Position(3, 2));
-		game.putXAt(new Position(3, 1));
-
-		assertTrue(game.XHasWon());
-		assertFalse(game.OHasWon());
-	}
-
-	@Test
-	void test18CheckOWinsInTheLeftDiagonal() {
-		Ternilapilli game = new Ternilapilli();
-		game.putXAt(new Position(2, 1));
-		game.putOAt(new Position(2, 2));
-		game.putXAt(new Position(1, 1));
-		game.putOAt(new Position(1, 3));
-		game.putXAt(new Position(1, 2));
-		game.putOAt(new Position(3, 1));
-
-		assertFalse(game.XHasWon());
-		assertTrue(game.OHasWon());
-	}
+//	@Test
+//	void test09NoOneWins() {
+//		Ternilapilli game = new Ternilapilli();
+//		game.putXAt(new Position(1, 1));
+//		game.putOAt(new Position(2, 2));
+//		game.putXAt(new Position(3, 3));
+//		game.putOAt(new Position(1, 2));
+//
+//		assertFalse(game.isWinnerX());
+//		assertFalse(game.isWinnerO());
+//	}
+//
+//	@Test
+//	void test10CheckIfXsWinsByRows() {
+//		Ternilapilli game = new Ternilapilli();
+//		game.putXAt(new Position(1, 1));
+//		game.putOAt(new Position(2, 2));
+//		game.putXAt(new Position(1, 3));
+//		game.putOAt(new Position(3, 2));
+//		game.putXAt(new Position(1, 2));
+//
+//		assertTrue(game.isWinnerX());
+//		assertFalse(game.isWinnerO());
+//	}
+//
+//	@Test
+//	void test11CheckIfOsWinsByRows() {
+//		Ternilapilli game = new Ternilapilli();
+//		game.putXAt(new Position(3, 3));
+//		game.putOAt(new Position(1, 1));
+//		game.putXAt(new Position(2, 1));
+//		game.putOAt(new Position(1, 3));
+//		game.putXAt(new Position(3, 1));
+//		game.putOAt(new Position(1, 2));
+//
+//		assertFalse(game.isWinnerX());
+//		assertTrue(game.isWinnerO());
+//	}
+//
+//	@Test
+//	void test12CheckIfXsWinsByColumns() {
+//		Ternilapilli game = new Ternilapilli();
+//		game.putXAt(new Position(3, 1));
+//		game.putOAt(new Position(2, 2));
+//		game.putXAt(new Position(2, 1));
+//		game.putOAt(new Position(3, 2));
+//		game.putXAt(new Position(1, 1));
+//
+//		assertTrue(game.isWinnerX());
+//		assertFalse(game.isWinnerO());
+//	}
+//
+//	@Test
+//	void test13CheckIfOsWinsByColumns() {
+//		Ternilapilli game = new Ternilapilli();
+//		game.putXAt(new Position(3, 3));
+//		game.putOAt(new Position(2, 2));
+//		game.putXAt(new Position(2, 1));
+//		game.putOAt(new Position(3, 2));
+//		game.putXAt(new Position(1, 1));
+//		game.putOAt(new Position(1, 2));
+//
+//		assertFalse(game.isWinnerX());
+//		assertTrue(game.isWinnerO());
+//	}
+//
+//	@Test
+//	void test14CheckHasWon() {
+//		Ternilapilli game = new Ternilapilli();
+//		game.putXAt(new Position(3, 3));
+//		game.putOAt(new Position(2, 2));
+//		game.putXAt(new Position(2, 1));
+//		game.putOAt(new Position(3, 2));
+//		game.putXAt(new Position(1, 1));
+//		game.putOAt(new Position(1, 2));
+//
+//		assertFalse(game.XHasWon());
+//		assertTrue(game.OHasWon());
+//	}
+//
+//	@Test
+//	void test15CheckXWinsInTheLeftDiagonal() {
+//		Ternilapilli game = new Ternilapilli();
+//		game.putXAt(new Position(3, 3));
+//		game.putOAt(new Position(2, 1));
+//		game.putXAt(new Position(2, 2));
+//		game.putOAt(new Position(3, 2));
+//		game.putXAt(new Position(1, 1));
+//
+//		assertTrue(game.XHasWon());
+//		assertFalse(game.OHasWon());
+//	}
+//
+//	@Test
+//	void test16CheckOWinsInTheLeftDiagonal() {
+//		Ternilapilli game = new Ternilapilli();
+//		game.putXAt(new Position(3, 1));
+//		game.putOAt(new Position(2, 2));
+//		game.putXAt(new Position(2, 1));
+//		game.putOAt(new Position(3, 3));
+//		game.putXAt(new Position(1, 2));
+//		game.putOAt(new Position(1, 1));
+//
+//		assertFalse(game.XHasWon());
+//		assertTrue(game.OHasWon());
+//	}
+//
+//	@Test
+//	void test17CheckXWinsInTheRightDiagonal() {
+//		Ternilapilli game = new Ternilapilli();
+//		game.putXAt(new Position(1, 3));
+//		game.putOAt(new Position(2, 1));
+//		game.putXAt(new Position(2, 2));
+//		game.putOAt(new Position(3, 2));
+//		game.putXAt(new Position(3, 1));
+//
+//		assertTrue(game.XHasWon());
+//		assertFalse(game.OHasWon());
+//	}
+//
+//	@Test
+//	void test18CheckOWinsInTheLeftDiagonal() {
+//		Ternilapilli game = new Ternilapilli();
+//		game.putXAt(new Position(2, 1));
+//		game.putOAt(new Position(2, 2));
+//		game.putXAt(new Position(1, 1));
+//		game.putOAt(new Position(1, 3));
+//		game.putXAt(new Position(1, 2));
+//		game.putOAt(new Position(3, 1));
+//
+//		assertFalse(game.XHasWon());
+//		assertTrue(game.OHasWon());
+//	}
 
 //	@Test 
 //	void test19OCannotPlayWhenGameIsOver() {

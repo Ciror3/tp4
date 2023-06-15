@@ -10,24 +10,17 @@ public class TurnX extends Status{
 	        status = "X";
 	 }
 	
-	public void notOsTurn() {
-		throw new RuntimeException(Ternilapilli.notOsTurn);
-	}
-	 
 	public void putXAt(Position position) {
 		if(ternilapilli.allTokensOnBoard()) {
 			throw new RuntimeException(ternilapilli.cannotPutAFourthToken);
 		}
-		if(ternilapilli.status instanceof TurnO) { 
-			throw new RuntimeException(ternilapilli.notXsTurn);
-		}  
-		ternilapilli.xs.add(position);
+		ternilapilli.putXWhenItsXsTurn(position);
 		xWon();
 		ternilapilli.status = new TurnO(ternilapilli);
 	}
 
 	public void putOAt(Position position) {
-		throw new RuntimeException(ternilapilli.notOsTurn);
+		ternilapilli.FailIfXPutsWhenItsOsTurn(position);
 	}
 	
 	public void checkIfOsContainsIt(Position position) {
