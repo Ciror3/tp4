@@ -15,7 +15,15 @@ public class Position {
 		return row == position.row && column == position.column;
 	}
 	
-	public int hashCode() {
+	public int hashCode() {  
 		return Objects.hash(row,column);
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public int getColumn() {
+		return column;
 	}
 }
