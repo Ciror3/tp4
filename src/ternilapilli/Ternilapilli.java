@@ -8,6 +8,7 @@ public class Ternilapilli {
 	public static String cannotPlayWhenGameIsOver = "Juego terminado";
 	public static String X = "X";
 	public static String O = "O";
+	public static String statusError = "El estado no es el correcto";
 	public static String positionTakenError = "La posicion ya esta ocupada";
 	public static String notXsTurn = "No es el turno de x";
 	public static String notOsTurn = "No es el turno de o";
@@ -15,7 +16,7 @@ public class Ternilapilli {
 	public Set<Position> xs;
 	public Set<Position> os;
 	public String winner = "null";
-	public Status status = new TurnX(this);
+	public Status status = new PutAndXStatus(this);
 
 	public Ternilapilli() {
 		xs = new HashSet<>();
@@ -83,29 +84,41 @@ public class Ternilapilli {
 		slideOFrom(new Position(i, j), new Position(k, m));
 	}
 
-	public void allTokensOnBoard(Position position) {
-		if (os.size() > 3) { 
-			os.remove(position);
-			throw new RuntimeException(cannotPutAFourthToken);
-		}
-		if (xs.size() > 3) {
-			xs.remove(position);
-			throw new RuntimeException(cannotPutAFourthToken);
-		}
+	public void putOWhenItsOsTurn(Position position) {
+		os.add(position); 	
+		status = new PutAndXStatus(this);
 	}
-
 	public void putXWhenItsXsTurn(Position position) {
 		xs.add(position);
-		status = new TurnO(this);
+		status = new PutAndOStatus(this);
 	}
 
+	
+	public void transitionFromPutOToSlideX(Position position) {
+		if (xs.size() == 3) { 
+			xs.remove(position); 
+			status = new SlideAndXStatus(this);;
+		}
+	}
+	
 	public void FailIfXPutsWhenItsOsTurn(Position position) {
 		throw new RuntimeException(notOsTurn);
 	}
 
-	public void putOWhenItsOsTurn(Position position) {
-		os.add(position);
-		status = new TurnX(this);
+	public void FailIfXslidesWhenItsStatusIsWrong(Position slider) {
+		throw new RuntimeException(statusError);		
+	}
+	
+	public void FailIfOslidesWhenItsStatusIsWrong(Position slider) {
+		throw new RuntimeException(statusError);		
+	}
+	
+	public void FailIfXPutsWhenItsStatusIsWrong(Position position) {
+		throw new RuntimeException(statusError);
+	}
+	
+	public void FailIfOPutsWhenItsStatusIsWrong(Position position) {
+		throw new RuntimeException(statusError);
 	}
 
 	public void FailIfOPutsWhenItsXsTurn(Position position) {
@@ -137,13 +150,13 @@ public class Ternilapilli {
 	public void slideOWhenItsOsTurn(Position token, Position slider) {
 		os.remove(token);
 		os.add(slider);
-		status = new TurnX(this);
+		status = new SlideAndXStatus(this);
 	}
 
 	public void slideXWhenItsXsTurn(Position token, Position slider) {
 		xs.remove(token);
-		xs.add(slider);
-		status = new TurnO(this);
+		xs.add(slider); 
+		status = new SlideAndOStatus(this);
 	}
 
 	private boolean hasRightDiagonal(Set<Position> lista) {

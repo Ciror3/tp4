@@ -1,29 +1,22 @@
 package ternilapilli;
 
-import java.util.Optional;
+public class SlideAndXStatus extends Status {
 
-public class TurnX extends Status {
 	public Ternilapilli ternilapilli;
 	public String status;
 
-	public TurnX(Ternilapilli ternilapilli) {
+	public SlideAndXStatus(Ternilapilli ternilapilli) {
 		this.ternilapilli = ternilapilli;
-		status = "X";
+		status = "Slide and X";
 	}
 
+	
 	public void putXAt(Position position) {
-		ternilapilli.failWhenSpaceAlreadyTakenForX(position);
-		ternilapilli.failWhenSpaceAlreadyTakenForO(position);
-		ternilapilli.putXWhenItsXsTurn(position);
-		ternilapilli.allTokensOnBoard(position);
-		if (ternilapilli.isWinnerX()) {
-			ternilapilli.xWon();
-			ternilapilli.gameFinished();
-		}
+		ternilapilli.FailIfXPutsWhenItsStatusIsWrong(position);
 	}
 
 	public void putOAt(Position position) {
-		ternilapilli.FailIfXPutsWhenItsOsTurn(position);
+		ternilapilli.FailIfOPutsWhenItsStatusIsWrong(position);
 	}
 
 	public void slideXFrom(Position token, Position slider) {
@@ -33,7 +26,7 @@ public class TurnX extends Status {
 		ternilapilli.slideXWhenItsXsTurn(token, slider);
 		if (ternilapilli.isWinnerX()) {
 			ternilapilli.xWon();
-			ternilapilli.gameFinished();
+			ternilapilli.gameFinished(); 
 		}
 	}
 

@@ -5,21 +5,26 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.Test;
 
 public class TernilapilliTest {
-	@Test
-	void test00CreateANewEmptyTernilapilli() { 
-		Ternilapilli game = new Ternilapilli();
+	Ternilapilli game;
 
+	@BeforeEach
+	public void setUp() {
+		game = new Ternilapilli();
+	}
+
+	@Test
+	void test00CreateANewEmptyTernilapilli() {
 		assertTrue(game.getXs().isEmpty());
 		assertTrue(game.getOs().isEmpty());
 	}
 
 	@Test
 	void test01PutFirstX() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(1, 1));
 
 		assertEquals(1, game.getXs().size());
@@ -29,7 +34,6 @@ public class TernilapilliTest {
 
 	@Test
 	void test02PutFirstO() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 
@@ -41,19 +45,17 @@ public class TernilapilliTest {
 
 	@Test
 	void test03XCannotPlayTwiceInARow() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(1, 1));
-		
+
 		assertThrowsLike(() -> game.putXAt(new Position(3, 3)), Ternilapilli.notXsTurn);
 		assertEquals(1, game.getXs().size());
 		assertTrue(game.getXs().contains(new Position(1, 1)));
 		assertTrue(game.getOs().isEmpty());
-		
+
 	}
- 
+
 	@Test
 	void test04OCannotPlayTwiceInARow() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 
@@ -66,7 +68,6 @@ public class TernilapilliTest {
 
 	@Test
 	void test05CannotPutAnXInAnAlreadyOccupiedPositionByX() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 
@@ -75,15 +76,14 @@ public class TernilapilliTest {
 		assertTrue(game.getXs().contains(new Position(1, 1)));
 		assertEquals(1, game.getOs().size());
 		assertTrue(game.getOs().contains(new Position(2, 2)));
-	} 
+	}
 
 	@Test
 	void test06CannotPutAnOInAnAlreadyOccupiedPositionByO() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(1, 2));
-		
+
 		assertThrowsLike(() -> game.putOAt(new Position(1, 1)), Ternilapilli.positionTakenError);
 		assertTrue(game.getXs().contains(new Position(1, 1)));
 		assertTrue(game.getXs().contains(new Position(1, 2)));
@@ -93,44 +93,39 @@ public class TernilapilliTest {
 
 	@Test
 	void test07CannotPutAnOInAnAlreadyOccupiedPositionByX() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(1, 1));
 		assertThrowsLike(() -> game.putOAt(new Position(1, 1)), Ternilapilli.positionTakenError);
 		assertEquals(1, game.getXs().size());
 		assertTrue(game.getXs().contains(new Position(1, 1)));
 		assertTrue(game.getOs().isEmpty());
-		
+
 	}
 
 	@Test
 	void test08CannotPutAnXInAnAlreadyOccupiedPositionByO() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
-		game.putXAt(new Position(3, 1)); 
+		game.putXAt(new Position(3, 1));
 		assertThrowsLike(() -> game.putOAt(new Position(2, 2)), Ternilapilli.positionTakenError);
-		assertEquals(2, game.getXs().size()); 
+		assertEquals(2, game.getXs().size());
 		assertTrue(game.getXs().contains(new Position(1, 1)));
 		assertEquals(1, game.getOs().size());
 		assertTrue(game.getOs().contains(new Position(2, 2)));
 	}
 
 	@Test
-	void test09NoOneWins() { 
-		Ternilapilli game = new Ternilapilli();
+	void test09NoOneWins() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
-		game.putXAt(new Position(3, 1)); 
+		game.putXAt(new Position(3, 1));
 		game.putOAt(new Position(2, 3));
-		
 
 		assertFalse(game.XHasWon());
 		assertFalse(game.OHasWon());
-	} 
+	}
 
 	@Test
 	void test10CheckIfXsWinsByRows() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(1, 3));
@@ -143,7 +138,6 @@ public class TernilapilliTest {
 
 	@Test
 	void test11CheckIfOsWinsByRows() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(3, 3));
 		game.putOAt(new Position(1, 1));
 		game.putXAt(new Position(2, 1));
@@ -157,7 +151,6 @@ public class TernilapilliTest {
 
 	@Test
 	void test12CheckIfXsWinsByColumns() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(3, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
@@ -170,7 +163,6 @@ public class TernilapilliTest {
 
 	@Test
 	void test13CheckIfOsWinsByColumns() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(3, 3));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
@@ -184,7 +176,6 @@ public class TernilapilliTest {
 
 	@Test
 	void test14CheckHasWon() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(3, 3));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
@@ -198,7 +189,6 @@ public class TernilapilliTest {
 
 	@Test
 	void test15CheckXWinsInTheLeftDiagonal() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(3, 3));
 		game.putOAt(new Position(2, 1));
 		game.putXAt(new Position(2, 2));
@@ -211,7 +201,6 @@ public class TernilapilliTest {
 
 	@Test
 	void test16CheckOWinsInTheLeftDiagonal() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(3, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
@@ -225,7 +214,6 @@ public class TernilapilliTest {
 
 	@Test
 	void test17CheckXWinsInTheRightDiagonal() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(1, 3));
 		game.putOAt(new Position(2, 1));
 		game.putXAt(new Position(2, 2));
@@ -238,7 +226,6 @@ public class TernilapilliTest {
 
 	@Test
 	void test18CheckOWinsInTheLeftDiagonal() {
-		Ternilapilli game = new Ternilapilli();
 		game.putXAt(new Position(2, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(1, 1));
@@ -250,9 +237,8 @@ public class TernilapilliTest {
 		assertTrue(game.OHasWon());
 	}
 
-	@Test 
+	@Test
 	void test19OCannotPlayWhenGameIsOver() {
-		Ternilapilli game = new Ternilapilli(); 
 		game.putXAt(new Position(1, 3));
 		game.putOAt(new Position(2, 1));
 		game.putXAt(new Position(2, 2));
@@ -260,12 +246,11 @@ public class TernilapilliTest {
 		game.putXAt(new Position(3, 1));
 
 		assertThrowsLike(() -> game.putOAt(new Position(3, 3)), Ternilapilli.cannotPlayWhenGameIsOver);
-	
+
 	}
 
 	@Test
-	void test20XCannotPutAFourthToken() {
-		Ternilapilli game = new Ternilapilli();
+	void test20XCannotPutIfItIsNotInTheProperStatus() {
 		game.putXAt(new Position(1, 3));
 		game.putOAt(new Position(2, 1));
 		game.putXAt(new Position(2, 3));
@@ -273,7 +258,7 @@ public class TernilapilliTest {
 		game.putXAt(new Position(3, 1));
 		game.putOAt(new Position(1, 1));
 
-		assertThrowsLike(() -> game.putXAt(new Position(3, 3)), Ternilapilli.cannotPutAFourthToken);
+		assertThrowsLike(() -> game.putXAt(new Position(3, 3)), Ternilapilli.statusError);
 		assertEquals(3, game.getXs().size());
 		assertTrue(game.getXs().contains(new Position(1, 3)));
 		assertTrue(game.getXs().contains(new Position(2, 3)));
@@ -281,8 +266,23 @@ public class TernilapilliTest {
 	}
 
 	@Test
-	void test21XCanSlideAToken() {
-		Ternilapilli game = new Ternilapilli();
+	void test21OCannotPutIfItIsNotInTheProperStatus() {
+		game.putXAt(new Position(1, 3));
+		game.putOAt(new Position(2, 1));
+		game.putXAt(new Position(2, 3));
+		game.putOAt(new Position(3, 2));
+		game.putXAt(new Position(3, 1));
+		game.putOAt(new Position(1, 1));
+
+		assertThrowsLike(() -> game.putXAt(new Position(3, 3)), Ternilapilli.statusError);
+		assertEquals(3, game.getXs().size());
+		assertTrue(game.getXs().contains(new Position(1, 3)));
+		assertTrue(game.getXs().contains(new Position(2, 3)));
+		assertTrue(game.getXs().contains(new Position(3, 1)));
+	}
+
+	@Test
+	void test22XCanSlideAToken() {
 		game.putXAt(new Position(2, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(1, 1));
@@ -298,8 +298,7 @@ public class TernilapilliTest {
 	}
 
 	@Test
-	void test22PlayerCanSlideAToken() {
-		Ternilapilli game = new Ternilapilli();
+	void test23PlayerCanSlideAToken() {
 		game.putXAt(new Position(2, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(1, 1));
@@ -320,8 +319,7 @@ public class TernilapilliTest {
 	}
 
 	@Test
-	void test23XCanWinIfItSlidesATokenInARow() {
-		Ternilapilli game = new Ternilapilli();
+	void test24XCanWinIfItSlidesATokenInARow() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(1, 2));
@@ -329,7 +327,7 @@ public class TernilapilliTest {
 		game.putXAt(new Position(2, 3));
 		game.putOAt(new Position(3, 2));
 
-		game.slideXfrom(2,3,1,3);
+		game.slideXfrom(2, 3, 1, 3);
 
 		assertTrue(game.isWinnerX());
 		assertFalse(game.isWinnerO());
@@ -337,8 +335,7 @@ public class TernilapilliTest {
 	}
 
 	@Test
-	void test24OCanWinIfItSlidesATokenInARow() {
-		Ternilapilli game = new Ternilapilli();
+	void test25OCanWinIfItSlidesATokenInARow() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(1, 2));
@@ -348,15 +345,14 @@ public class TernilapilliTest {
 
 		game.slideXfrom(1, 2, 1, 3);
 		game.slideOfrom(3, 2, 2, 3);
- 
+
 		assertTrue(game.isWinnerO());
 		assertFalse(game.isWinnerX());
 
 	}
 
 	@Test
-	void test25XCanWinIfItSlidesATokenInAColumn() {
-		Ternilapilli game = new Ternilapilli();
+	void test26XCanWinIfItSlidesATokenInAColumn() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
@@ -372,8 +368,7 @@ public class TernilapilliTest {
 	}
 
 	@Test
-	void test26OCanWinIfItSlidesATokenInAColumn() {
-		Ternilapilli game = new Ternilapilli();
+	void test27OCanWinIfItSlidesATokenInAColumn() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
@@ -383,15 +378,14 @@ public class TernilapilliTest {
 
 		game.slideXfrom(1, 1, 1, 2);
 		game.slideOfrom(2, 2, 3, 3);
-		
+
 		assertFalse(game.isWinnerX());
 		assertTrue(game.isWinnerO());
 
 	}
 
 	@Test
-	void test27XCanWinIfItSlidesATokenInADiagonal() {
-		Ternilapilli game = new Ternilapilli();
+	void test28XCanWinIfItSlidesATokenInADiagonal() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 1));
 		game.putXAt(new Position(2, 2));
@@ -403,12 +397,11 @@ public class TernilapilliTest {
 
 		assertTrue(game.isWinnerX());
 		assertFalse(game.isWinnerO());
- 
+
 	}
 
 	@Test
-	void test28OCanWinIfItSlidesATokenInADiagonal() {
-		Ternilapilli game = new Ternilapilli();
+	void test29OCanWinIfItSlidesATokenInADiagonal() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
@@ -425,8 +418,7 @@ public class TernilapilliTest {
 	}
 
 	@Test
-	void test29CannotSlideAnXInAnAlreadyOccupiedPositionByX() {
-		Ternilapilli game = new Ternilapilli();
+	void test30CannotSlideAnXInAnAlreadyOccupiedPositionByX() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
@@ -442,8 +434,7 @@ public class TernilapilliTest {
 	}
 
 	@Test
-	void test30CannotSlideAnOInAnAlreadyOccupiedPositionByO() {
-		Ternilapilli game = new Ternilapilli();
+	void test31CannotSlideAnOInAnAlreadyOccupiedPositionByO() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
@@ -459,8 +450,7 @@ public class TernilapilliTest {
 	}
 
 	@Test
-	void test31CannotSlideAnOInAnAlreadyOccupiedPositionByX() {
-		Ternilapilli game = new Ternilapilli();
+	void test32CannotSlideAnOInAnAlreadyOccupiedPositionByX() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
@@ -476,13 +466,12 @@ public class TernilapilliTest {
 	}
 
 	@Test
-	void test32CannotSlideAnXInAnAlreadyOccupiedPositionByO() {
-		Ternilapilli game = new Ternilapilli();
+	void test33CannotSlideAnXInAnAlreadyOccupiedPositionByO() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
 		game.putOAt(new Position(3, 1));
-		game.putXAt(new Position(3, 2)); 
+		game.putXAt(new Position(3, 2));
 		game.putOAt(new Position(2, 3));
 
 		assertThrowsLike(() -> game.slideXfrom(2, 1, 2, 2), Ternilapilli.positionTakenError);
@@ -492,14 +481,12 @@ public class TernilapilliTest {
 		assertTrue(game.getXs().contains(new Position(3, 2)));
 	}
 
-	
 	@Test
-	void test33CannotSlideAXIntoAnIllegalPosition() {
-		Ternilapilli game = new Ternilapilli();
+	void test34CannotSlideAXIntoAnIllegalPosition() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
-		game.putOAt(new Position(3, 1)); 
+		game.putOAt(new Position(3, 1));
 		game.putXAt(new Position(3, 2));
 		game.putOAt(new Position(2, 3));
 
@@ -509,17 +496,16 @@ public class TernilapilliTest {
 		assertTrue(game.getXs().contains(new Position(2, 1)));
 		assertTrue(game.getXs().contains(new Position(3, 2)));
 	}
-	
+
 	@Test
-	void test34CannotSlideAnOIntoAnIllegalPosition() {
-		Ternilapilli game = new Ternilapilli();
+	void test35CannotSlideAnOIntoAnIllegalPosition() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
 		game.putOAt(new Position(3, 1));
 		game.putXAt(new Position(3, 2));
 		game.putOAt(new Position(3, 3));
-		
+
 		game.slideXfrom(2, 1, 1, 2);
 		assertThrowsLike(() -> game.slideOfrom(3, 3, 1, 3), Ternilapilli.canOnlySlideToAdjacentSpaces);
 		assertEquals(3, game.getOs().size());
@@ -527,44 +513,64 @@ public class TernilapilliTest {
 		assertTrue(game.getOs().contains(new Position(3, 1)));
 		assertTrue(game.getOs().contains(new Position(3, 3)));
 	}
-	
-	@Test 
-	void test35XCannotSlideWhenGameIsOver() {
-		Ternilapilli game = new Ternilapilli();
+
+	@Test
+	void test36XCannotSlideWhenGameIsOver() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
-		game.putOAt(new Position(3, 1)); 
+		game.putOAt(new Position(3, 1));
 		game.putXAt(new Position(3, 2));
 		game.putOAt(new Position(1, 3));
-		
+
 		assertThrowsLike(() -> game.slideXfrom(2, 1, 1, 2), Ternilapilli.cannotPlayWhenGameIsOver);
 		assertEquals(3, game.getXs().size());
 		assertTrue(game.getXs().contains(new Position(1, 1)));
 		assertTrue(game.getXs().contains(new Position(2, 1)));
 		assertTrue(game.getXs().contains(new Position(3, 2)));
 	}
-	
-	@Test 
-	void test36OCannotSlideWhenGameIsOver() {
-		Ternilapilli game = new Ternilapilli();
+
+	@Test
+	void test37OCannotSlideWhenGameIsOver() {
 		game.putXAt(new Position(1, 1));
 		game.putOAt(new Position(2, 2));
 		game.putXAt(new Position(2, 1));
-		game.putOAt(new Position(1, 2)); 
-		game.putXAt(new Position(3, 2)); 
-		game.putOAt(new Position(2, 3)); 
-		
-		game.slideXfrom(3, 2, 3, 1); 
+		game.putOAt(new Position(1, 2));
+		game.putXAt(new Position(3, 2));
+		game.putOAt(new Position(2, 3));
+
+		game.slideXfrom(3, 2, 3, 1);
 		assertThrowsLike(() -> game.slideOfrom(2, 2, 3, 3), Ternilapilli.cannotPlayWhenGameIsOver);
 		assertEquals(3, game.getOs().size());
 		assertTrue(game.getOs().contains(new Position(1, 2)));
 		assertTrue(game.getOs().contains(new Position(2, 2)));
 		assertTrue(game.getOs().contains(new Position(2, 3)));
 	}
-	
-	
-	
+
+	@Test
+	void test37XCannotSlideWhenPutStatus() {
+		game.putXAt(new Position(1, 1));
+		game.putOAt(new Position(2, 2));
+		game.putXAt(new Position(2, 1));
+		game.putOAt(new Position(1, 2));
+
+		assertThrowsLike(() -> game.slideXfrom(2, 1, 3, 1), Ternilapilli.statusError);
+		assertEquals(2, game.getXs().size());
+		assertTrue(game.getXs().contains(new Position(1, 1)));
+		assertTrue(game.getXs().contains(new Position(2, 1)));
+	}
+
+	@Test
+	void test38OCannotSlideWhenPutStatus() {
+		game.putXAt(new Position(1, 1));
+		game.putOAt(new Position(2, 2));
+		game.putXAt(new Position(2, 1));
+
+		assertThrowsLike(() -> game.slideOfrom(2, 2, 1, 2), Ternilapilli.statusError);
+		assertEquals(1, game.getOs().size());
+		assertTrue(game.getOs().contains(new Position(2, 2)));
+	}
+
 	private void assertThrowsLike(Executable lambda, String message) {
 		assertEquals(message, assertThrows(RuntimeException.class, lambda).getMessage());
 	}
