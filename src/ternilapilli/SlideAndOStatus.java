@@ -22,16 +22,13 @@ public class SlideAndOStatus extends Status {
 	public void slideXFrom(Position token, Position slider) {
 		ternilapilli.FailIfXPutsWhenItsOsTurn(slider);	
 	}
-
+ 
 	public void slideOFrom(Position token, Position slider) {
 		ternilapilli.failWhenSpaceAlreadyTakenForX(slider);
 		ternilapilli.failWhenSpaceAlreadyTakenForO(slider); 
 		ternilapilli.failWhenSpaceIsTooFarAway(token, slider);
 		ternilapilli.slideOWhenItsOsTurn(token, slider);
-		if (ternilapilli.isWinnerO()) {
-			ternilapilli.oWon();
-			ternilapilli.gameFinished();
-		}
+		ternilapilli.isWinnerO();
 	}
 
 }

@@ -7,7 +7,7 @@ public class gameOver extends Status{
 		this.ternilapilli = ternilapilli;
         status = "Game Over";
 	}
-	
+	 
 	public void putXAt(Position position) {
 		throw new RuntimeException(ternilapilli.cannotPlayWhenGameIsOver);
 	}

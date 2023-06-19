@@ -14,10 +14,7 @@ public class PutAndXStatus extends Status{
 		ternilapilli.failWhenSpaceAlreadyTakenForX(position);
 		ternilapilli.failWhenSpaceAlreadyTakenForO(position);
 		ternilapilli.putXWhenItsXsTurn(position);
-		if (ternilapilli.isWinnerX()) {
-			ternilapilli.xWon();
-			ternilapilli.gameFinished();
-		} 
+		ternilapilli.isWinnerX();
 	}
 
 	public void putOAt(Position position) {

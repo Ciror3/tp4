@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.Test;
@@ -329,8 +328,8 @@ public class TernilapilliTest {
 
 		game.slideXfrom(2, 3, 1, 3);
 
-		assertTrue(game.isWinnerX());
-		assertFalse(game.isWinnerO());
+		assertTrue(game.XHasWon());
+		assertFalse(game.OHasWon());
 
 	}
 
@@ -346,8 +345,8 @@ public class TernilapilliTest {
 		game.slideXfrom(1, 2, 1, 3);
 		game.slideOfrom(3, 2, 2, 3);
 
-		assertTrue(game.isWinnerO());
-		assertFalse(game.isWinnerX());
+		assertTrue(game.OHasWon());
+		assertFalse(game.XHasWon());
 
 	}
 
@@ -362,8 +361,8 @@ public class TernilapilliTest {
 
 		game.slideXfrom(3, 2, 3, 1);
 
-		assertTrue(game.isWinnerX());
-		assertFalse(game.isWinnerO());
+		assertTrue(game.XHasWon());
+		assertFalse(game.OHasWon());
 
 	}
 
@@ -379,8 +378,8 @@ public class TernilapilliTest {
 		game.slideXfrom(1, 1, 1, 2);
 		game.slideOfrom(2, 2, 3, 3);
 
-		assertFalse(game.isWinnerX());
-		assertTrue(game.isWinnerO());
+		assertFalse(game.XHasWon());
+		assertTrue(game.OHasWon());
 
 	}
 
@@ -395,8 +394,8 @@ public class TernilapilliTest {
 
 		game.slideXfrom(2, 3, 3, 3);
 
-		assertTrue(game.isWinnerX());
-		assertFalse(game.isWinnerO());
+		assertTrue(game.XHasWon());
+		assertFalse(game.OHasWon());
 
 	}
 
@@ -412,8 +411,8 @@ public class TernilapilliTest {
 		game.slideXfrom(3, 2, 3, 3);
 		game.slideOfrom(2, 3, 1, 3);
 
-		assertTrue(game.isWinnerO());
-		assertFalse(game.isWinnerX());
+		assertTrue(game.OHasWon());
+		assertFalse(game.XHasWon());
 
 	}
 
@@ -559,7 +558,7 @@ public class TernilapilliTest {
 		assertTrue(game.getXs().contains(new Position(1, 1)));
 		assertTrue(game.getXs().contains(new Position(2, 1)));
 	}
-
+ 
 	@Test
 	void test38OCannotSlideWhenPutStatus() {
 		game.putXAt(new Position(1, 1));

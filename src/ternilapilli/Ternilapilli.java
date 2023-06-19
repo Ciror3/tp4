@@ -16,14 +16,13 @@ public class Ternilapilli {
 	public Set<Position> xs;
 	public Set<Position> os;
 	public String winner = "null";
-	public Status status = new PutAndXStatus(this);
+	public Status status = new PutAndXStatus(this); 
 
 	public Ternilapilli() {
 		xs = new HashSet<>();
 		os = new HashSet<>();
 	}
 
-	// HAcer metodos muy especificos y chequeamos
 	public Set<Position> getXs() {
 		return xs;
 	}
@@ -48,21 +47,19 @@ public class Ternilapilli {
 		status.slideOFrom(token, slider);
 	}
 
-	public boolean isWinnerO() {
-		return hasWon(os);
-	}
-
-	public void oWon() {
-		winner=O;
+	public void isWinnerO() {
+		if (hasWon(os)) {//Como es un cambio de estado dejamos el if
+			winner= O;
+			gameFinished(); 
+		}
 	}
 	
-	public boolean isWinnerX() {
-		return hasWon(xs);
+	public void isWinnerX() {
+		if (hasWon(xs)) {//Como es un cambio de estado dejamos el if
+			winner=X;
+			gameFinished(); 
+		}
 	}
-
-	public void xWon() {
-		winner=X;
-	} 
 	
 	public boolean XHasWon() {
 		return winner == X; 
@@ -91,12 +88,11 @@ public class Ternilapilli {
 	public void putXWhenItsXsTurn(Position position) {
 		xs.add(position);
 		status = new PutAndOStatus(this);
-	}
+	} 
 
 	
 	public void transitionFromPutOToSlideX(Position position) {
 		if (xs.size() == 3) { 
-			xs.remove(position); 
 			status = new SlideAndXStatus(this);;
 		}
 	}

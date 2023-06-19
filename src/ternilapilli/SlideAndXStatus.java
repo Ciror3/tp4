@@ -8,7 +8,7 @@ public class SlideAndXStatus extends Status {
 	public SlideAndXStatus(Ternilapilli ternilapilli) {
 		this.ternilapilli = ternilapilli;
 		status = "Slide and X";
-	}
+	} 
 
 	
 	public void putXAt(Position position) {
@@ -24,10 +24,7 @@ public class SlideAndXStatus extends Status {
 		ternilapilli.failWhenSpaceAlreadyTakenForO(slider);
 		ternilapilli.failWhenSpaceIsTooFarAway(token, slider);
 		ternilapilli.slideXWhenItsXsTurn(token, slider);
-		if (ternilapilli.isWinnerX()) {
-			ternilapilli.xWon();
-			ternilapilli.gameFinished(); 
-		}
+		ternilapilli.isWinnerX(); 
 	}
 
 	public void slideOFrom(Position token, Position slider) {

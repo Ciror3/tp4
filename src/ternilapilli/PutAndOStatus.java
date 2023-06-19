@@ -19,10 +19,7 @@ public class PutAndOStatus extends Status {
 		ternilapilli.failWhenSpaceAlreadyTakenForO(position);
 		ternilapilli.putOWhenItsOsTurn(position);
 		ternilapilli.transitionFromPutOToSlideX(position);
-		if (ternilapilli.isWinnerO()) {
-			ternilapilli.oWon();
-			ternilapilli.gameFinished();
-		} 
+		ternilapilli.isWinnerO();
 	}
 
 	public void slideXFrom(Position token, Position slider) {
